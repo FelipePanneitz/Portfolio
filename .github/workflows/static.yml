@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Dados | Felipe Jean Panneitz</title>
+    <style>
+
+        /* Variáveis para Modo Escuro */
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --header-bg: #020617;
+            --tag-bg: #334155;
+            --border: rgba(255,255,255,0.1);
+        }
+
+	/* Variáveis para Modo Claro (Padrão) */
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --header-bg: #1e293b;
+            --header-text: #ffffff;
+            --tag-bg: #e2e8f0;
+            --border: rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 5rem 1rem 8rem 1rem;
+            text-align: center;
+        }
+
+        /* Botão Dark Mode */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px 18px;
+            cursor: pointer;
+            border-radius: 30px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .theme-toggle:hover { transform: scale(1.05); }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Seção Sobre Mim */
+        .about-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .about-text h2 { color: var(--primary); margin-top: 0; }
+        
+        .about-contact {
+            background: var(--bg-body);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .contact-item {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .contact-item:hover { color: var(--primary); }
+
+        /* Cards de Projetos */
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 4rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .project-content { padding: 2rem; }
+
+        .project-header {
+            border-left: 6px solid var(--primary);
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-header h2 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .tech-tags span {
+            background: var(--tag-bg);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .dashboard-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            background: #000;
+        }
+
+        .dashboard-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 850px) {
+            .about-section { grid-template-columns: 1fr; margin-top: -40px; }
+            header { padding-bottom: 6rem; }
+        }
+        
+        /* ===== NOVA SEÇÃO TECNOLOGIAS ===== */
+	.tech-section {
+    	margin-top: -20px;
+    	margin-bottom: 3rem;
+	}
+
+	.tech-section h2 {
+    	font-size: 1.4rem;
+    	margin-bottom: 1rem;
+    	color: var(--text-main);
+	}
+
+	.tech-list {
+    	display: flex;
+    	flex-wrap: wrap;
+    	gap: 12px;
+	}
+
+	.tech-list span {
+    	background: var(--tag-bg);
+    	padding: 10px 18px;
+    	border-radius: 12px;
+    	font-size: 0.9rem;
+    	font-weight: 600;
+    	color: var(--text-main);
+    	border: 1px solid var(--border);
+    	display: flex;
+    	align-items: center;
+    	gap: 6px;
+    	transition: all 0.2s ease;
+	}
+
+	.tech-list span:hover {
+    	transform: translateY(-2px);
+    	background: var(--primary);
+    	color: white;
+	}
+
+	/* ===== HERO HEADER PROFISSIONAL ===== */
+	.hero {
+    		background: linear-gradient(135deg, #020617, #1e293b);
+    		color: white;
+    		padding: 6rem 1rem 7rem 1rem;
+    		text-align: center;
+    		position: relative;
+    		overflow: hidden;
+	}
+
+	/* efeito de luz suave */
+	.hero::before {
+    		content: "";
+    		position: absolute;
+    		width: 500px;
+    		height: 500px;
+    		background: radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%);
+    		top: -100px;
+    		left: 50%;
+    		transform: translateX(-50%);
+    		filter: blur(80px);
+	}
+
+	.hero-content {
+    		position: relative;
+    		z-index: 2;
+	}
+
+	.hero h1 {
+    		font-size: 2.5rem;
+    		margin-bottom: 1rem;
+	}
+
+	.hero h1 span {
+    		color: var(--primary);
+	}
+
+	.hero-subtitle {
+    		font-size: 1.1rem;
+    		color: #cbd5f5;
+    		max-width: 600px;
+    		margin: 0 auto 2rem auto;
+	}
+
+	/* BOTÕES */
+	.hero-buttons {
+    		display: flex;
+    		justify-content: center;
+    		gap: 12px;
+    		flex-wrap: wrap;
+	}
+
+	.btn-primary,
+	.btn-secondary {
+    		padding: 12px 22px;
+    		border-radius: 30px;
+    		text-decoration: none;
+    		font-weight: 600;
+    		transition: 0.3s;
+	}
+
+	.btn-primary {
+    		background: var(--primary);
+    		color: white;
+	}
+
+	.btn-primary:hover {
+    		transform: translateY(-2px);
+    		box-shadow: 0 6px 20px rgba(37,99,235,0.4);
+	}
+
+	.btn-secondary {
+    		border: 1px solid rgba(255,255,255,0.3);
+    		color: white;
+	}
+
+	.btn-secondary:hover {
+    		background: rgba(255,255,255,0.1);
+	}
+
+    </style>
+</head>
+<body data-theme="dark">
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Modo Claro</button>
+
+<header class="hero">
+    <div class="hero-content">
+        <h1>Portfólio de <span>Business Intelligence</span></h1>
+        
+        <p class="hero-subtitle">
+            Transformando dados em <strong>insights estratégicos</strong> e decisões orientadas por dados
+        </p>
+
+        <div class="hero-buttons">
+            <a href="https://www.linkedin.com/in/felipepanneitz" target="_blank" class="btn-primary">🔗 LinkedIn</a>
+            <a href="mailto:panneitzfelipe@gmail.com" class="btn-secondary">✉️ Contato</a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <section class="about-section">
+        <div class="about-text">
+            <h2>Sobre Mim</h2>
+            <p>
+                Olá! Sou <strong>Felipe Jean Panneitz</strong>, especialista em análise de dados e Business Intelligence. 
+                Minha expertise envolve todo o pipeline de dados: desde a extração e modelagem em <strong>SQL Server</strong> 
+                ou <strong>Excel</strong> até a criação de dashboards de alto impacto no <strong>Power BI</strong> e <strong>Python</strong>.
+            </p>
+            <p>
+                Com sólida base técnica em DAX e processos de ETL, busco entregar soluções que não apenas mostram números, 
+                mas contam a história por trás dos dados para facilitar a tomada de decisão executiva.
+            </p>
+        </div>
+        <div class="about-contact">
+            <h3 style="margin-top: 0; font-size: 1.1rem;">Contato e Links</h3>
+            <a href="https://www.linkedin.com/in/felipepanneitz" target="_blank" class="contact-item">🔗 LinkedIn</a>
+            <a href="https:///w.app/1y0pui" target="_blank" class="contact-item">📞 Contato</a>
+            <a href="mailto:panneitzfelipe@gmail.com" class="contact-item">✉️ E-mail</a>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                📍 Santa Catarina, Brasil
+            </div>
+        </div>
+    </section>
+    
+    <section class="tech-section">
+    <h2>Principais Tecnologias</h2>
+    <div class="tech-list">
+        <span>📊 Power BI</span>
+        <span>🗄️ SQL Server</span>
+	<span>🗄️ MySQL</span>
+	<span>🗄️ Firebird</span>
+        <span>🐍 Python</span>
+        <span>📈 Excel</span>
+        <span>📐 DAX</span>
+	<span>🔄 Power Quey</span>
+        <span>🔄 ETL</span>
+    </div>
+    </section> 
+   
+    <section class="project-card">
+        <div class="project-content">
+            <div class="project-header">
+                <h2>01. Análise de Vendas e Performance (Automóveis)</h2>
+                <div class="tech-tags">
+                    <span>Power BI</span> <span>SQL Server</span> <span>ETL</span> <span>AI</span> <span>DAX Avançado</span>
+                </div>
+            </div>
+            <p style="text-indent: 30px;">Este dashboard oferece uma análise abrangente e multifacetada de vendas, abrangendo desde a performance individual de vendedores até insights detalhados sobre produtos e clientes. Todos os dados utilizados foram extraídos de um banco de dados <strong>SQL Server</strong>, que criei do zero e inseri dados fictícios gerados com o auxílio de <strong>IA (ChatGPT)</strong>. Cada página é projetada para fornecer uma visão clara e iterativa dos dados.</p>
+	    <p style="text-indent: 30px;">Em suma, esses dashboards fornecem um painel robusto e interativo para monitorar, analisar e otimizar estratégias de vendas. Através da visualização de dados de alta qualidade, é possível identificar padrões, avaliar o desempenho de forma granular e subsidiar decisões estratégicas que impulsionam o crescimento e a eficiência do negócio.</p>
+        </div>
+        <div class="dashboard-container">
+            <iframe title="Dashboard 1" src="https://app.powerbi.com/view?r=eyJrIjoiZGZmMzRkNGItNzkwNC00MzdlLTkwYjgtODE1ZDRmNzc4YzAzIiwidCI6ImE1ZjM5YWJmLTIzMTUtNGEyOC04Y2RmLTViYjY2N2FjMDVhMCJ9" allowFullScreen="true"></iframe>
+        </div>
+    </section>
+
+    <section class="project-card">
+        <div class="project-content">
+            <div class="project-header">
+                <h2>02. Dashboard de RH</h2>
+                <div class="tech-tags"><span>Power BI</span> <span>Excel</span> <span>ETL</span> <span>DAX Avançado</span> <span>Power Query</span></div>
+            </div>
+            <p style="text-indent: 30px;">Desenvolvi este painel de RH com o objetivo de monitorar indicadores essenciais relacionados à força de trabalho da empresa. O dashboard fornece uma visão geral de contratações, desligamentos, distribuição dos funcionários por cidade, gênero, área e cargo, além do índice de turnover. Essa solução é ideal para departamentos de Recursos Humanos que desejam acompanhar a composição da equipe, entender padrões de contratação e retenção, e identificar áreas com maior rotatividade.</p>
+        </div>
+        <div class="dashboard-container">
+            <iframe title="Dashboard 2" src="https://app.powerbi.com/view?pageName=ReportSection&r=eyJrIjoiY2JhMDNlM2UtMzY2ZC00NjQ1LWI0OWYtZmY0MjI2YWU0NWQ4IiwidCI6ImE1ZjM5YWJmLTIzMTUtNGEyOC04Y2RmLTViYjY2N2FjMDVhMCJ9" allowFullScreen="true"></iframe>
+        </div>
+    </section>
+
+    <section class="project-card">
+        <div class="project-content">
+            <div class="project-header">
+                <h2>03. Dashboard de Produção</h2>
+                <div class="tech-tags"><span>Power BI</span> <span>Excel</span> <span>ETL</span> <span>DAX Avançado</span> <span>Power Query</span></div>
+            </div>
+            <p style="text-indent: 30px;">Este painel foi criado com o objetivo de acompanhar o desempenho da produção industrial ao longo do tempo. Ele apresenta os principais indicadores relacionados à produtividade, qualidade e rendimento de peças produzidas, permitindo uma gestão visual e assertiva do chão de fábrica. Esse dashboard fornece uma visão gerencial essencial para áreas de produção, engenharia industrial e controle de qualidade, contribuindo para a identificação de gargalos, monitoramento de eficiência operacional e tomada de decisões baseadas em dados confiáveis.</p>
+        </div>
+        <div class="dashboard-container">
+            <iframe title="Dashboard 3" src="https://app.powerbi.com/view?r=eyJrIjoiMDE4M2ZhNmItOWJhNi00MDMyLWE4MzMtN2Q2YjY4MzZhOTYwIiwidCI6ImE1ZjM5YWJmLTIzMTUtNGEyOC04Y2RmLTViYjY2N2FjMDVhMCJ9" allowFullScreen="true"></iframe>
+        </div>
+    </section>
+
+    <section class="project-card">
+        <div class="project-content">
+            <div class="project-header">
+                <h2>04. Dashboard Financeiro</h2>
+                <div class="tech-tags"><span>Power BI</span> <span>Excel</span> <span>ETL</span> <span>DAX Avançado</span> <span>Power Query</span> <span>Análise Financeira</span></div>
+            </div>
+            <p style="text-indent: 30px;">Este painel foi desenvolvido com o objetivo de fornecer uma análise financeira mensal e consolidada da empresa. Com um layout intuitivo e visual moderno, ele permite o monitoramento de receitas, pagamentos, impostos, lucros e volume de transações, incluindo destaque para movimentações via Pix. Este dashboard auxilia a equipe financeira na tomada de decisões estratégicas com base em dados consolidados e visuais claros, facilitando a análise de desempenho econômico mensal e anual.</p>
+        </div>
+        <div class="dashboard-container">
+            <iframe title="Dashboard 4" src="https://app.powerbi.com/view?r=eyJrIjoiNGRkNzk2NDEtYTI5My00MTYwLWEzOWYtNDRkMmViYzM1MTRmIiwidCI6ImE1ZjM5YWJmLTIzMTUtNGEyOC04Y2RmLTViYjY2N2FjMDVhMCJ9" allowFullScreen="true"></iframe>
+        </div>
+    </section>
+
+    <section class="project-card">
+        <div class="project-content">
+            <div class="project-header">
+                <h2>05. Dashboard Controle Financeiro Pessoal</h2>
+                <div class="tech-tags"><span>Power BI</span> <span>Excel</span> <span>ETL</span> <span>DAX Avançado</span> <span>Power Query</span><span>Análise Financeira</span></div>
+            </div>
+            <p style="text-indent: 30px;">Desenvolvi esse projeto no Power BI 100% iterativo, onde criei um painel de controle financeiro pessoal. Este relatório detalhado permite uma visão abrangente das finanças, facilitando a tomada de decisões informadas. Foi implementado uma automação eficiente para o processamento de extratos bancários mensais. Com essa solução, os usuários precisam apenas salvar o arquivo <strong>.csv</strong> fornecido pelo banco em uma pasta designada. A partir daí, todos os dados, valores e datas dos relatórios são atualizados automaticamente, eliminando a necessidade de intervenções manuais adicionais. Esta automação não apenas economiza tempo, mas também garante a precisão e a consistência das informações financeiras.</p>
+
+        </div>
+        <div class="dashboard-container">
+            <iframe title="Dashboard 5" src="https://app.powerbi.com/view?r=eyJrIjoiMGQzYmQwZTAtMjZhMC00Mjc3LWI2MDAtNmE4YzJlODk2MzQ3IiwidCI6ImE1ZjM5YWJmLTIzMTUtNGEyOC04Y2RmLTViYjY2N2FjMDVhMCJ9" allowFullScreen="true"></iframe>
+        </div>
+    </section>
+
+    <section class="project-card">
+        <div class="project-content">
+            <div class="project-header">
+                <h2>06. Dashboard Comercial</h2>
+                <div class="tech-tags"><span>Power BI</span> <span>Excel</span> <span>ETL</span> <span>DAX Avançado</span> <span>Power Query</span></div>
+            </div>
+            <p style="text-indent: 30px;">Este relatório foi desenvolvido com o objetivo de fornecer uma visão estratégica e visualmente clara sobre o desempenho de vendas, distribuição de clientes e lucratividade. A análise é dividida em duas páginas principais: uma visão geral com KPIs e análise mensal, e uma segunda página focada no perfil dos clientes e nas categorias de produto.</p>
+	    <p style="text-indent: 30px;">O painel permite tomadas de decisão baseadas em dados reais, facilitando a identificação de mercados mais rentáveis, sazonalidade de vendas e perfil dos clientes. Uma solução ideal para áreas de vendas, marketing, planejamento estratégico e expansão comercial.</p>
+        </div>
+        <div class="dashboard-container">
+            <iframe title="Dashboard 6" src="https://app.powerbi.com/view?r=eyJrIjoiNzQ4Y2ViYmMtNjg1My00YjZkLTkzMDAtNWNmOTUyYjdiOTEyIiwidCI6ImE1ZjM5YWJmLTIzMTUtNGEyOC04Y2RmLTViYjY2N2FjMDVhMCJ9" allowFullScreen="true"></iframe>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 - Desenvolvido por <strong>Felipe Jean Panneitz</strong></p>
+    <p><em>"Dados são o novo petróleo, mas o BI é a refinaria."</em></p>
+</footer>
+
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        const btn = document.getElementById('themeBtn');
+        
+        if (body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            btn.innerHTML = "🌙 Modo Escuro";
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            btn.innerHTML = "☀️ Modo Claro";
+        }
+    }
+</script>
+
+</body>
+</html>
